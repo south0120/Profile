@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOUTH - AIクリエイター</title>
+    <link rel="stylesheet" href="south-portfolio-styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="profile-section">
+            <div class="profile-image">
+                <img src="south-profile-image.jpg" alt="プロフィール画像">
+            </div>
+            <h1 class="main-title">SOUTH</h1>
+            <p class="subtitle">AIクリエイター</p>
+        </header>
+
+        <section class="prosebo-section">
+            <a href="https://procevo.biz/" target="_blank" rel="noopener noreferrer" class="prosebo-link">
+                <div class="prosebo-banner">
+                    <h2 class="prosebo-title">Procevo</h2>
+                    <p class="prosebo-subtitle">ワークショップ型AIコミュニティ</p>
+                    <div class="prosebo-cta">
+                        <span>詳細を見る</span>
+                        <div class="hand-icon">🚀</div>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <section class="social-links">
+            <a href="https://x.com/south_0120" class="social-link twitter" target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </div>
+                <span>X (Twitter)</span>
+            </a>
+            
+            <a href="https://note.com/south373" class="social-link note" target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <img src="note-icon.png" alt="note" width="20" height="20">
+                </div>
+                <span>note</span>
+            </a>
+            
+        </section>
+
+        <footer class="contact-section">
+            <button class="contact-button" onclick="toggleContactForm()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                仕事の依頼はこちら
+            </button>
+            
+            <div id="contact-form" class="contact-form" style="display: none;">
+                <form onsubmit="sendEmail(event)">
+                    <div class="form-group">
+                        <label for="name">お名前</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">件名</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">メッセージ</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" class="submit-button">送信</button>
+                        <button type="button" class="cancel-button" onclick="toggleContactForm()">キャンセル</button>
+                    </div>
+                </form>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        function toggleContactForm() {
+            const form = document.getElementById('contact-form');
+            const button = document.querySelector('.contact-button');
+            
+            if (form.style.display === 'none' || form.style.display === '') {
+                form.style.display = 'block';
+                button.textContent = 'フォームを閉じる';
+                form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                form.style.display = 'none';
+                button.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    仕事の依頼はこちら
+                `;
+            }
+        }
+        
+        function sendEmail(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            const emailBody = `お名前: ${name}%0D%0A` +
+                             `メールアドレス: ${email}%0D%0A%0D%0A` +
+                             `メッセージ:%0D%0A${message.replace(/\n/g, '%0D%0A')}`;
+            
+            const mailtoLink = `mailto:south0120@gmail.com?subject=${encodeURIComponent(subject)}&body=${emailBody}`;
+            
+            window.location.href = mailtoLink;
+            
+            // フォームをリセットして閉じる
+            document.querySelector('#contact-form form').reset();
+            toggleContactForm();
+        }
+    </script>
+</body>
+</html>
